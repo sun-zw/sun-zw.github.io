@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>地址选择器</title>
+    <link rel="stylesheet" href="./css/selector.css">
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script type="text/javascript" src="./js/axios.min.js"></script>
+    <script type="text/javascript" src="./js/selector.js"></script>
+</head>
+
+<body>
+    <div id="selector" class="form_page" v-bind:style="{width: width + 'px',height: height + 'px',}" v-cloak>
+        <!--背景层-->
+        <div class="blur"></div>
+        <!-- start-->
+        <div class="main">
+
+            <div class="f_label input_address">
+                <p class="t_child">地址1</p>
+                <label class="f_label_child select_addr">
+                    <span class="l_t">
+                        <span class="red">&ensp;*&ensp;</span> 所在区域1</span>
+                    <div class="select_addr_child" data-work='school' v-on:click='showPicker($event)'>
+                        <div class="s_show_select" v-if="info.province == ''&& info.city == ''&& info.district == ''">
+                            <span> 点击选择区域</span>
+                        </div>
+                        <div class="s_show_select val" v-else>
+                            <span>{{info.province}}</span>
+                            <span>{{info.city}}</span>
+                            <span>{{info.district}}</span>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div class="f_label input_address">
+                <p class="t_child">地址2</p>
+                <label class="f_label_child select_addr">
+                    <span class="l_t">
+                        <span class="red">&ensp;*&ensp;</span>所在区域2</span>
+                    <div class="select_addr_child" data-work='home' v-on:click='showPicker($event)'>
+                        <div class="s_show_select" v-if="info.stu_province == ''&& info.stu_city == ''&& info.stu_district == ''">
+                            <span> 点击选择区域</span>
+                        </div>
+                        <div class="s_show_select val" v-else>
+                            <span>{{info.stu_province}}</span>
+                            <span>{{info.stu_city}}</span>
+                            <span>{{info.stu_district}}</span>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+        </div>
+        <!-- end -->
+        <!--地区选择器 - 组件 -->
+        <div v-if="isPicker">
+            <address-selector :width='width' v-on:data='setData' @hide='hideSelector'>
+            </address-selector>
+        </div>
+        <!--地区选择器 end -->
+    </div>
+</body>
+
+</html>
